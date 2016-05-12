@@ -45,6 +45,7 @@
 - (void)addFakeNavBar
 {
     _bar = [[HHNavigationBar alloc] init];
+    _bar.shadowImage = [UIImage new];
     if ([self useTransparentNavigationBar]) {
         [_bar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     } else {
