@@ -1,6 +1,6 @@
 # HHNavigationController
 
-<img src="https://raw.githubusercontent.com/shuoshi/HHNavigationController-Demo/master/readme/nav.gif" width="200">
+<img src="https://raw.githubusercontent.com/shuoshi/HHNavigationController/master/readme/nav.gif" width="200">
 
 Intro
 
