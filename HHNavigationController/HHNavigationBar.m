@@ -7,13 +7,9 @@
 //
 
 #import "HHNavigationBar.h"
-
-@interface HHNavigationBar ()
-
-@end
+#import <objc/runtime.h>
 
 @implementation HHNavigationBar
-
 
 - (void)layoutSubviews
 {
