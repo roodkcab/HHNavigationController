@@ -10,6 +10,13 @@
 #import "HHNavigationController.h"
 #import "HHBaseViewController.h"
 
+typedef NS_ENUM(NSInteger, HHViewAction) {
+    HHViewAppear,
+    HHViewDisappear
+};
+
+static NSNumber *s_appearanceBarTranslucent;
+
 @interface HHBaseViewController ()
 
 @property (nonatomic, strong) UINavigationBar *bar;
@@ -42,19 +49,20 @@
     return NO;
 }
 
-- (void)addFakeNavBar
+- (void)addFakeNavBar:(HHViewAction)action
 {
     _bar = [[HHNavigationBar alloc] init];
     _bar.shadowImage = [UIImage new];
     if ([self useTransparentNavigationBar]) {
         [_bar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        _bar.translucent = YES;
     } else {
         [_bar setBackgroundImage:[UINavigationBar.appearance backgroundImageForBarMetrics:UIBarMetricsDefault] forBarMetrics:UIBarMetricsDefault];
+        _bar.translucent = s_appearanceBarTranslucent.boolValue;
     }
     _bar.barStyle = UINavigationBar.appearance.barStyle;
-    _bar.translucent = YES;
     [self.view addSubview:_bar];
-    [_bar setFrame:CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, 64)];
+    [_bar setFrame:CGRectMake(0, _bar.translucent ? 0 : (action == HHViewAppear ? 0 : -64), UIScreen.mainScreen.bounds.size.width, 64)];
 }
 
 - (void)removeFakeNavBar
@@ -68,10 +76,14 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.userInteractionEnabled = NO;
+    if (nil == s_appearanceBarTranslucent) {
+        s_appearanceBarTranslucent = @(self.navigationController.navigationBar.translucent);
+    }
+    self.navigationController.navigationBar.translucent = YES;
     [self removeFakeNavBar];
     if (((HHNavigationController *)self.navigationController).shouldAddFakeNavigationBar) {
         [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-        [self addFakeNavBar];
+        [self addFakeNavBar:HHViewAppear];
     }
 }
 
@@ -80,7 +92,7 @@
     [super viewWillDisappear:animated];
     [self removeFakeNavBar];
     if (((HHNavigationController *)self.navigationController).shouldAddFakeNavigationBar) {
-        [self addFakeNavBar];
+        [self addFakeNavBar:HHViewDisappear];
     }
 }
 
@@ -90,8 +102,10 @@
     self.navigationController.navigationBar.userInteractionEnabled = YES;
     if (![self useTransparentNavigationBar]) {
         self.navigationController.navigationBar.barStyle = UINavigationBar.appearance.barStyle;
-        self.navigationController.navigationBar.translucent = YES;
+        self.navigationController.navigationBar.translucent = s_appearanceBarTranslucent.boolValue;
         [self.navigationController.navigationBar setBackgroundImage:[UINavigationBar.appearance backgroundImageForBarMetrics:UIBarMetricsDefault] forBarMetrics:UIBarMetricsDefault];
+    } else {
+        self.navigationController.navigationBar.translucent = YES;
     }
     [self removeFakeNavBar];
 }
