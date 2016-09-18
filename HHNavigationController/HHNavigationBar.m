@@ -8,12 +8,7 @@
 
 #import "HHNavigationBar.h"
 
-@interface HHNavigationBar ()
-
-@end
-
 @implementation HHNavigationBar
-
 
 - (void)layoutSubviews
 {

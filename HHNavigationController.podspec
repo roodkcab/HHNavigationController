@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "HHNavigationController"
-  s.version      = "0.0.1"
+  s.version      = "0.0.3"
   s.summary      = "yet another navigation controller for iOS"
   s.description  = <<-DESC
                    yet another navigation controller for iOS
@@ -16,6 +16,6 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/shuoshi/HHNavigationController"
   s.license      = "MIT"
   s.author       = { "陈小实" => "chenshuoshi@gmail.com" }
-  s.source       = { :git => "https://github.com/shuoshi/HHNavigationController.git", :tag => "0.0.1" }
-  s.source_files  = "HHNavigationController", "HHNavigationController/*.{h,m}"
+  s.source       = { :git => "https://github.com/shuoshi/HHNavigationController.git", :tag => "0.0.3" }
+  s.source_files  = "HHNavigationController/*.{h,m}"
 end
