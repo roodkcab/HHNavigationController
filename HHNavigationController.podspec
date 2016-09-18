@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "HHNavigationController"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.summary      = "yet another navigation controller for iOS"
   s.description  = <<-DESC
                    yet another navigation controller for iOS
