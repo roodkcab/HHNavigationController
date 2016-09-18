@@ -11,6 +11,7 @@ Pod::Spec.new do |s|
   s.version      = "0.0.1"
   s.summary      = "yet another navigation controller for iOS"
   s.description  = <<-DESC
+                   yet another navigation controller for iOS
                    DESC
   s.homepage     = "https://github.com/shuoshi/HHNavigationController"
   s.license      = "MIT"
